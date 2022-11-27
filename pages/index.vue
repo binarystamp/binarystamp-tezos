@@ -166,7 +166,7 @@ export default {
         name: 'Tezos BinaryStamp'
       }
       const wallet = new BeaconWallet(walletOptions)
-      if ( !wallet.client.getActiveAccount()) {
+      if (!wallet.client.getActiveAccount()) {
         try {
           await wallet.requestPermissions({
             network: {
