@@ -5,7 +5,9 @@ This dApp allows anyone to Binary Stamp any digital asset. This stamp attributes
 Applications of this dApp include: existence and ownership proof at a certain date.
 This is particularly important to give proper attribution to creators and inventors.
 
-Smart contract (testnet): [KT1SZMexiFoKntsSK7Bn4UXJx5xLWQWYpCeT](https://ghostnet.tzkt.io/KT1SZMexiFoKntsSK7Bn4UXJx5xLWQWYpCeT/storage/)
+Smart contracts:
+* mainnet: [KT1GaaBybPBtahDiuMka1F15rKkhfRVe9pYS](https://tzkt.io/KT1GaaBybPBtahDiuMka1F15rKkhfRVe9pYS/storage/)
+* testnet: [KT1SZMexiFoKntsSK7Bn4UXJx5xLWQWYpCeT](https://ghostnet.tzkt.io/KT1SZMexiFoKntsSK7Bn4UXJx5xLWQWYpCeT/storage/)
 
 ## Build Setup
 
@@ -23,5 +25,5 @@ $ yarn deploy
 ```
 
 ## Authors
-- Antonio Roldao
-- Ali Al-Ali
+- [Antonio Roldao](https://anton.io)
+- [Ali Al-Ali](https://www.linkedin.com/in/ali-al-ali-1660b7179/)
