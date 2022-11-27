@@ -1,0 +1,14 @@
+{
+    "name": "Binary Stamp",
+    "short_name": "Binary Stamp",
+    "icons": [
+        {
+            "src": "/android-chrome-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#be3144",
+    "background_color": "#be3144",
+    "display": "standalone"
+}
