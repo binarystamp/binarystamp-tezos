@@ -2,7 +2,7 @@
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6" :loading="loading">
       <v-alert v-if="success" dismissible type="success">
-        Stamped on to the <a target="_blank" :href="url">blockchain</a>.
+        Stamped on to the <a target="_blank" :href="urlStamp">blockchain</a>.
       </v-alert>
       <v-alert v-if="error" dismissible type="error">
         {{ error }}
@@ -20,11 +20,15 @@
           <v-expansion-panel-content>
             <p>
               This dApp allows anyone to Binary Stamp any digital asset.
-              This stamp attributes ownership of an hash to an address at a given time.
+              This stamp attributes ownership of a hash to an address at a given time.
             </p>
             <p>
               Applications of this dApp include: existence and ownership proof at a certain date.
               This is particularly important to give proper attribution to creators and inventors.
+            </p>
+            <p>
+              This dApp is using Tezos' {{ bc }} with the following contract
+              <a target="_blank" :href="uc">{{ ca }}</a>.
             </p>
           </v-expansion-panel-content>
         </v-expansion-panel>
@@ -34,9 +38,11 @@
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <div v-if="!checking">
-              <v-text-field v-model="hash" outlined label="Hash"/>
+              <v-text-field v-model="hash" outlined label="Hash" />
               <v-alert v-if="has_owner" dismissible type="success">
-                Is owned by {{ owner }} since {{ since }}.
+                Is owned by
+                <a target="_blank" :href="urlOwner">{{ owner }}</a>
+                since {{ since }}.
               </v-alert>
               <v-alert v-if="no_owner" dismissible type="alert">
                 No owner found.
@@ -82,7 +88,20 @@
 import { TezosToolkit } from '@taquito/taquito'
 import { BeaconWallet } from '@taquito/beacon-wallet'
 
-const contractAddress = 'KT1SZMexiFoKntsSK7Bn4UXJx5xLWQWYpCeT'
+const DEVELOPMENT = false
+
+// Testnet
+let blockChain = 'ghostnet'
+let blockExplorer = 'https://ghostnet.tzkt.io'
+let rpcEndPoint = 'https://ghostnet.ecadinfra.com'
+let contractAddress = 'KT1SZMexiFoKntsSK7Bn4UXJx5xLWQWYpCeT'
+if (!DEVELOPMENT) {
+  // Mainnet
+  blockChain = 'mainnet'
+  blockExplorer = 'https://tzkt.io'
+  rpcEndPoint = 'https://mainnet.api.tez.ie'
+  contractAddress = 'KT1GaaBybPBtahDiuMka1F15rKkhfRVe9pYS'
+}
 
 export default {
   components: {
@@ -100,14 +119,18 @@ export default {
       author: '',
       message: '',
       error: null,
-      url: '',
+      urlStamp: '',
+      urlOwner: '',
       checking: false,
       has_owner: false,
-      no_owner: false
+      no_owner: false,
+      bc: blockChain,
+      ca: contractAddress,
+      uc: `${blockExplorer}\\${contractAddress}`
     }
   },
   mounted () {
-    this.Tezos = new TezosToolkit('https://ghostnet.ecadinfra.com')
+    this.Tezos = new TezosToolkit(rpcEndPoint)
     this.panel = [0, 1, 2]
   },
   methods: {
@@ -130,6 +153,7 @@ export default {
         this.owner = entry[0]
         this.since = entry[1]
         this.has_owner = true
+        this.urlOwner = `${blockExplorer}\\${entry[0]}`
       } catch (e) {
         this.no_owner = true
       }
@@ -146,7 +170,7 @@ export default {
       try {
         await wallet.requestPermissions({
           network: {
-            type: 'ghostnet'
+            type: blockChain
           }
         })
       } catch (e) {
@@ -178,7 +202,7 @@ export default {
       const opResult = await operation.confirmation()
       if (opResult.completed) {
         console.log(JSON.stringify(opResult.block))
-        this.url = `https://ghostnet.tzkt.io/${opResult.block.hash}`
+        this.urlStamp = `${blockExplorer}\\${opResult.block.hash}`
         this.success = true
         this.confirming = false
         this.sending = false

@@ -1,8 +1,8 @@
 <template>
   <v-app dark>
     <v-app-bar fixed app>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
+      <v-spacer />
+      <v-spacer />
       <v-toolbar-title>
         BinaryStamp | Tezos
       </v-toolbar-title>
@@ -13,8 +13,8 @@
       <a class="link ml-2" about="_blank" href="https://twitter.com/BinaryStamp">
         <v-icon large>mdi-twitter</v-icon>
       </a>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
+      <v-spacer />
+      <v-spacer />
     </v-app-bar>
     <v-main>
       <v-container>
@@ -34,6 +34,9 @@ export default {
 </script>
 
 <style>
+   a {
+     text-decoration: none;
+   }
   .link {
     text-decoration: none;
   }

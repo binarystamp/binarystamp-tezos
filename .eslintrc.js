@@ -15,6 +15,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    'no-console': 'off',
     'no-unused-vars': 0,
     'vue/html-closing-bracket-newline': ['error', {
       singleline: 'never',
