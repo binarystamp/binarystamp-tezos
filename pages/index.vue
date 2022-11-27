@@ -15,11 +15,11 @@
         multiple>
         <v-expansion-panel>
           <v-expansion-panel-header>
-            Info
+            Introduction
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <p>
-              This dApp allows anyone to Binary Stamp any digital asset.
+              BinaryStamp allows anyone to Binary Stamp any digital asset.
               This stamp attributes ownership of a hash to an address at a given time.
             </p>
             <p>
