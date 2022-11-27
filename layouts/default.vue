@@ -3,8 +3,9 @@
     <v-app-bar fixed app>
       <v-spacer />
       <v-spacer />
+      <v-img max-height="80"  max-width="80" style="margin-top: 10px" src="/mstile-150x150.png" class="float-sm-left" />
       <v-toolbar-title>
-        BinaryStamp | Tezos
+        <div class="float-sm-left"> BinaryStamp | Tezos</div>
       </v-toolbar-title>
       <v-spacer />
       <a class="link ml-2" about="_blank" href="https://github.com/BinaryStamp">
