@@ -166,16 +166,17 @@ export default {
         name: 'Tezos BinaryStamp'
       }
       const wallet = new BeaconWallet(walletOptions)
-
-      try {
-        await wallet.requestPermissions({
-          network: {
-            type: blockChain
-          }
-        })
-      } catch (e) {
-        this.error = e.description
-        return
+      if ( !wallet.client.getActiveAccount()) {
+        try {
+          await wallet.requestPermissions({
+            network: {
+              type: blockChain
+            }
+          })
+        } catch (e) {
+          this.error = e.description
+          return
+        }
       }
       const userAddress = await wallet.getPKH()
       console.log(`userAddress: ${userAddress}`)
